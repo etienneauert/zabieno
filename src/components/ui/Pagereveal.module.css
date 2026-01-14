@@ -1,0 +1,103 @@
+.pageRevealOverlay {
+  position: fixed;
+  inset: 0;
+  background: white;
+  z-index: 9999;
+}
+
+.done {
+  pointer-events: none;
+}
+
+.pageRevealName {
+  position: fixed;
+  z-index: 10000;
+  color: #111;
+  will-change: transform, left, top, opacity;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  text-align: center;
+}
+
+.pageRevealTitle {
+  font-family: "Handlee", cursive;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  /* On very small screens 9vw gets too small; keep a higher minimum */
+  font-size: clamp(48px, 9vw, 120px);
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.pageRevealChar {
+  display: inline-block;
+  will-change: transform, opacity;
+  background-image: linear-gradient(
+    90deg,
+    #ff3d00 0%,
+    #ffb300 18%,
+    #00c853 36%,
+    #00b0ff 54%,
+    #7c4dff 72%,
+    #ff2d95 90%,
+    #ff3d00 100%
+  );
+  /* continuous gradient across the whole title (values set from JS per letter) */
+  background-size: var(--titleW, 100%) 100%;
+  background-position: calc(0px - var(--charX, 0px)) 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.pageRevealSubtitle {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  font-size: clamp(13px, 1.8vw, 18px);
+  line-height: 1.1;
+  white-space: nowrap;
+  opacity: 0.8;
+  will-change: filter, opacity;
+}
+
+.doneName .pageRevealSubtitle {
+  display: none;
+}
+
+.pageRevealTabs {
+  display: inline-flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.pageRevealTab {
+  appearance: none;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  background: rgba(255, 255, 255, 0.75);
+  color: #111;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: transform 120ms ease, border-color 120ms ease,
+    background 120ms ease;
+}
+
+.pageRevealTab:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0, 0, 0, 0.24);
+}
+
+.activeTab {
+  border-color: rgba(0, 0, 0, 0.35);
+  background: rgba(255, 255, 255, 0.95);
+}

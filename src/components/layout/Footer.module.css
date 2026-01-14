@@ -1,0 +1,28 @@
+.footer {
+  width: 100%;
+  min-height: 120px;
+  padding: 24px 16px 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.nav {
+  width: min(1200px, 100%);
+  display: flex;
+  gap: 102px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+.link {
+  color: #111;
+  text-decoration: none;
+  font-size: 14px;
+  opacity: 0.85;
+  transition: opacity 150ms ease;
+}
+
+.link:hover {
+  opacity: 1;
+}

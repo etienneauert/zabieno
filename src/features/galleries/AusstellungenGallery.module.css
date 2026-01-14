@@ -1,0 +1,70 @@
+.section {
+  width: min(1600px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 60px;
+}
+
+/* Masonry: Bilder behalten ihre natürlichen Abmessungen/Höhen */
+.grid {
+  column-gap: 14px;
+  column-count: 2;
+  column-fill: auto;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    column-count: 3;
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    column-count: 4;
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid {
+    column-count: 5;
+  }
+}
+
+@media (min-width: 1400px) {
+  .grid {
+    column-count: 6;
+  }
+}
+
+@media (min-width: 1600px) {
+  .grid {
+    column-count: 7;
+  }
+}
+
+.card {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 14px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform: scale(1);
+  will-change: transform;
+  transition: transform 180ms ease;
+  cursor: pointer;
+}
+
+.card:hover .img {
+  transform: scale(1.04);
+}
+

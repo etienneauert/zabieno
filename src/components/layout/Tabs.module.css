@@ -1,0 +1,57 @@
+.tabs {
+  position: relative;
+  z-index: 10010; /* über dem Opener-Overlay */
+  width: min(960px, calc(100% - 32px));
+  display: inline-flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  pointer-events: none; /* erst nach reveal-done klickbar */
+}
+
+.tab {
+  appearance: none;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  background: transparent;
+  color: #111;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  filter: blur(3px);
+  transform: translateY(6px);
+  transition: opacity 350ms ease, transform 350ms ease, filter 450ms ease,
+    border-color 120ms ease, background 120ms ease;
+}
+
+.tab:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0, 0, 0, 0.24);
+}
+
+.active {
+  border-color: rgba(0, 0, 0, 0.35);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+:global(.reveal-done) .tabs {
+  pointer-events: auto;
+}
+
+:global(.reveal-done) .tab {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0);
+}
+
+:global(.reveal-done) .tab:nth-child(1) {
+  transition-delay: 0ms;
+}
+:global(.reveal-done) .tab:nth-child(2) {
+  transition-delay: 90ms;
+}
+:global(.reveal-done) .tab:nth-child(3) {
+  transition-delay: 180ms;
+}

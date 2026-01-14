@@ -1,0 +1,70 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.dialog {
+  position: relative;
+  outline: none;
+  max-width: min(92vw, 1200px);
+  max-height: 92vh;
+}
+
+.media {
+  position: relative;
+}
+
+.topbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 0 2px 12px;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.65);
+  background: transparent;
+  text-align: center;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: min(70vw, 900px);
+  background: transparent;
+  /* kein "blur/glow" hinter dem Namen */
+  text-shadow: none;
+}
+
+.meta {
+  font-size: 13px;
+  opacity: 0.85;
+  white-space: nowrap;
+  background: transparent;
+}
+
+.image {
+  display: block;
+  max-width: 100%;
+  max-height: 92vh;
+  height: auto;
+  width: auto;
+  border-radius: 14px;
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.55);
+}
+
+/* Scroll lock */
+:global(.lightbox-open) {
+  overflow: hidden;
+}
+

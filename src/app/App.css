@@ -1,0 +1,35 @@
+* {
+  /* Keine zusätzlichen Webfonts für Fließtext – nur System-Fallbacks */
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* verhindert horizontales "Wackeln", wenn Scrollbar bei Tab-Wechsel kommt/geht */
+  scrollbar-gutter: stable;
+  overflow-y: scroll; /* Scrollbar immer reservieren (wichtig bei späterem Bild-Load) */
+  /* Scrollbar komplett verstecken (trotzdem scrollbar) */
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  -ms-overflow-style: none; /* alte Edge/IE */
+}
+
+.top {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px; /* Abstand zwischen Zabieno und Tabs */
+}
+
+.main {
+  padding-top: 24px;
+}

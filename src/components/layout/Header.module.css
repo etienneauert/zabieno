@@ -1,0 +1,36 @@
+.header {
+  position: relative;
+  z-index: 10010; /* über dem Opener-Overlay */
+  display: flex;
+  justify-content: center;
+  padding-top: 18px;
+  opacity: 0; /* wird erst nach dem Opener "aktiv" */
+  transition: opacity 0ms;
+}
+
+.title {
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  /* Match the end size from Pagereveal (targetTitlePx logic) so it looks identical after the handoff */
+  font-size: var(--zabieno-title-px, 52px);
+
+  line-height: 1;
+  background-image: linear-gradient(
+    90deg,
+    #ff3d00 0%,
+    #ffb300 18%,
+    #00c853 36%,
+    #00b0ff 54%,
+    #7c4dff 72%,
+    #ff2d95 90%,
+    #ff3d00 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+:global(.reveal-done) .header {
+  opacity: 1;
+}
