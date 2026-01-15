@@ -6,11 +6,103 @@
   justify-content: center;
 }
 
+.whiteOverlay {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 20000;
+  opacity: 1;
+  pointer-events: none;
+  transform: translateY(130%);
+  will-change: transform;
+  transition: transform 460ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.whiteOverlayOpen {
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.overlayContent {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(720px, calc(100% - 48px));
+  text-align: center;
+  color: #111;
+}
+
+.overlayHeading {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.overlaySubheading {
+  margin-top: 6px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.overlayBlock {
+  margin-top: 18px;
+  font-size: 14px;
+  line-height: 1.55;
+  opacity: 0.95;
+}
+
+.overlayPdf {
+  margin-top: 14px;
+}
+
+.overlayPdfLink {
+  color: #111;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: 0.9;
+}
+
+.overlayPdfLink:hover {
+  opacity: 1;
+}
+
+.overlayBack {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%) translateY(14px);
+  z-index: 20001;
+  appearance: none;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background: rgba(255, 255, 255, 0.9);
+  color: #111;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 220ms ease, transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 160ms ease;
+}
+
+.whiteOverlayOpen .overlayBack {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.overlayBack:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
 .nav {
   width: min(1200px, 100%);
   display: flex;
   gap: 102px;
   justify-content: center;
+  align-items: flex-start; /* verhindert "stretch" in der Höhe -> Unterstrich bleibt direkt am Text */
   flex-wrap: wrap;
   margin-top: 50px;
 }
@@ -19,10 +111,32 @@
   color: #111;
   text-decoration: none;
   font-size: 14px;
+  line-height: 1.1;
   opacity: 0.85;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0;
   transition: opacity 150ms ease;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  /* leicht unter dem Text, nicht am Box-Boden */
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms ease;
 }
 
 .link:hover {
   opacity: 1;
+}
+
+.link:hover::after {
+  transform: scaleX(1);
 }
