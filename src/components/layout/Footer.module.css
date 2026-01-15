@@ -52,6 +52,124 @@
   opacity: 0.95;
 }
 
+.overlayList {
+  display: inline-block;
+  text-align: left;
+  max-width: 100%;
+}
+
+.overlayList ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.overlayList li {
+  margin: 10px 0;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.overlayListTitle {
+  font-weight: 600;
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+
+.overlayList li:hover .overlayListTitle {
+  text-decoration: underline;
+}
+
+.overlayPressLayout {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.overlayPressList {
+  flex: 1;
+  min-width: 260px;
+  text-align: left;
+}
+
+.overlayPressList ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.overlayPressList li {
+  margin: 10px 0;
+}
+
+.overlayPressButton {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.overlayPressList li:hover .overlayListTitle {
+  text-decoration: underline;
+}
+
+.overlayPressButtonActive .overlayListTitle {
+  text-decoration: underline;
+}
+
+.overlayPressMeta {
+  opacity: 0.85;
+}
+
+.overlayPressPreview {
+  flex: 1;
+  min-width: 260px;
+  max-width: 520px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+}
+
+.overlayPressImage {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 650px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.overlayPressPlaceholder {
+  opacity: 0.7;
+}
+
+.overlayPressPdfLink {
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .overlayPressLayout {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .overlayPressPreview {
+    max-width: 100%;
+  }
+}
+
+
 .overlayPdf {
   margin-top: 14px;
 }

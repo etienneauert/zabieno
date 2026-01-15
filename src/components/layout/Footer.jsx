@@ -1,73 +1,9 @@
 import styles from "./Footer.module.css";
 import { useEffect, useState } from "react";
-import vitaPdf from "../../assets/VitaSabineOdebrechtA5.pdf";
-
-function OverlayShell({ children }) {
-  return (
-    <div className={styles.overlayContent} onClick={(e) => e.stopPropagation()}>
-      {children}
-    </div>
-  );
-}
-
-function KontaktOverlay() {
-  return (
-    <OverlayShell>
-      <div className={styles.overlayHeading}>Sabine Odebrecht</div>
-      <div className={styles.overlaySubheading}>Acrylmalerei</div>
-
-      <div className={styles.overlayBlock}>
-        Sabine Odebrecht
-        <br />
-        Greiteler Weg 30 | 33102 Paderborn
-        <br />
-        05251 - 8 777 555 | 0160 - 91 78 56 51
-        <br />
-        zabieno@web.de | www.zabieno.net
-      </div>
-    </OverlayShell>
-  );
-}
-
-function IchUeberMichOverlay({ isEn }) {
-  return (
-    <OverlayShell>
-      <div className={styles.overlayHeading}>Ich über mich</div>
-
-      <div className={styles.overlayBlock}>
-        Geboren, aufgewachsen, zur Schule gegangen,
-        <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unendlich viele Menschen und
-        Möglichkeiten kennengelernt,
-        <br />
-        Erfahrungen gesammelt, auf die Nase gefallen,
-        <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wieder aufgestanden,
-        <br />
-        weitergemacht
-      </div>
-
-      <div className={styles.overlayPdf}>
-        <a
-          className={styles.overlayPdfLink}
-          href={vitaPdf}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {isEn ? "CV (PDF)" : "Vita (PDF)"}
-        </a>
-      </div>
-    </OverlayShell>
-  );
-}
-
-function DatenschutzImpressumOverlay() {
-  return null;
-}
-
-function AndereUeberMichOverlay() {
-  return null;
-}
+import KontaktOverlay from "./overlays/KontaktOverlay";
+import IchUeberMichOverlay from "./overlays/IchUeberMichOverlay";
+import DatenschutzImpressumOverlay from "./overlays/DatenschutzImpressumOverlay";
+import AndereUeberMichOverlay from "./overlays/AndereUeberMichOverlay";
 
 export default function Footer({ lang = "de" }) {
   const isEn = lang === "en";
