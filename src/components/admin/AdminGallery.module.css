@@ -1,15 +1,50 @@
-.section {
+.adminGallery {
   width: min(2200px, calc(100% - 32px));
   margin: 0 auto;
   padding: 24px 0 60px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.heading {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.addButton {
+  padding: 10px 52px;
+  font-size: 14px;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid black;
+  border-radius: 1000px;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
+  font-weight: 500;
+}
+
+.addButton:hover {
+  background-color: #000000;
+  color: white;
+}
+
+.hiddenFileInput {
+  display: none;
 }
 
 /* Masonry: Bilder behalten ihre natürlichen Abmessungen/Höhen */
 .grid {
   column-gap: 14px;
   column-count: 2;
-  column-width: auto;
-  width: 100%;
+  column-fill: auto;
 }
 
 @media (min-width: 640px) {
@@ -57,7 +92,6 @@
 .card {
   break-inside: avoid;
   -webkit-column-break-inside: avoid;
-  page-break-inside: avoid;
   display: inline-block;
   width: 100%;
   margin: 0 0 14px;
@@ -65,23 +99,12 @@
   overflow: hidden;
   border: none;
   background: transparent;
-  cursor: pointer;
-  box-sizing: border-box;
-  vertical-align: top;
 }
 
 .img {
   width: 100%;
   height: auto;
   display: block;
-  transform: scale(1);
-  will-change: transform;
-  transition: transform 180ms ease;
-  cursor: pointer;
-}
-
-.card:hover .img {
-  transform: scale(1.04);
 }
 
 .deleteButton {
@@ -101,3 +124,6 @@
   background-color: #b71c1c;
 }
 
+.deleteButton:active {
+  background-color: #8b0000;
+}

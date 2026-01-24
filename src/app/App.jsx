@@ -8,10 +8,12 @@ import FotografienGallery from "../features/galleries/FotografienGallery";
 import AusstellungenGallery from "../features/galleries/AusstellungenGallery";
 import Footer from "../components/layout/Footer";
 import LanguageToggle from "../components/layout/LanguageToggle";
+import ScrollToTop from "../components/ui/ScrollToTop";
 
 function App() {
   const [activeTab, setActiveTab] = useState("gemaelde");
   const [lang, setLang] = useState("de");
+  const [isEditMode, setIsEditMode] = useState(false);
 
   return (
     <div>
@@ -28,8 +30,14 @@ function App() {
         {activeTab === "fotografien" ? <FotografienGallery /> : null}
         {activeTab === "ausstellungen" ? <AusstellungenGallery /> : null}
       </main>
-      <Footer lang={lang} />
+      <Footer
+        lang={lang}
+        onChangeTab={setActiveTab}
+        isEditMode={isEditMode}
+        setIsEditMode={setIsEditMode}
+      />
       <Pagereveal lang={lang} />
+      <ScrollToTop />
     </div>
   );
 }

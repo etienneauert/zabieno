@@ -5,30 +5,40 @@ import vitaPdf from "../../../assets/VitaSabineOdebrechtA5.pdf";
 export default function IchUeberMichOverlay({ isEn }) {
   return (
     <OverlayShell>
-      <div className={styles.overlayHeading}>Ich über mich</div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "calc(100vh - 200px)",
+        }}
+      >
+        <div className={styles.overlayHeading}>Ich über mich</div>
 
-      <div className={styles.overlayBlock}>
-        Geboren, aufgewachsen, zur Schule gegangen,
-        <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unendlich viele Menschen und
-        Möglichkeiten kennengelernt,
-        <br />
-        Erfahrungen gesammelt, auf die Nase gefallen,
-        <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wieder aufgestanden,
-        <br />
-        weitergemacht
-      </div>
+        <div className={styles.overlayBlock}>
+          Geboren, aufgewachsen, zur Schule gegangen,
+          <br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unendlich viele Menschen und
+          Möglichkeiten kennengelernt,
+          <br />
+          Erfahrungen gesammelt, auf die Nase gefallen,
+          <br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wieder aufgestanden,
+          <br />
+          weitergemacht
+        </div>
 
-      <div className={styles.overlayPdf}>
-        <a
-          className={styles.overlayPdfLink}
-          href={vitaPdf}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {isEn ? "CV (PDF)" : "Vita (PDF)"}
-        </a>
+        <div className={styles.overlayPdf}>
+          <a
+            className={styles.overlayPdfLink}
+            href={vitaPdf}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {isEn ? "CV (PDF)" : "Vita (PDF)"}
+          </a>
+        </div>
       </div>
     </OverlayShell>
   );

@@ -1,6 +1,8 @@
 import styles from "./GemaeldeGallery.module.css";
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Lightbox from "../../components/ui/Lightbox";
+import { isImageDeleted } from "../../utils/deletedImages";
+import { getAddedImagesByCategory } from "../../utils/addedImages";
 
 // Vite: sammelt alle Bilddateien im Gemälde-Ordner als URLs
 const paintingModules = import.meta.glob(
@@ -8,7 +10,7 @@ const paintingModules = import.meta.glob(
   { eager: true, import: "default" }
 );
 
-const paintings = Object.entries(paintingModules)
+const allPaintings = Object.entries(paintingModules)
   .map(([path, url]) => ({
     path,
     url,
@@ -26,15 +28,48 @@ function parseDisplayMeta(filename) {
 
 export default function GemaeldeGallery() {
   const [selected, setSelected] = useState(null);
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  // Höre auf Storage-Events und Custom Events, um auf Änderungen zu reagieren
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === "zabieno_added_images" || e.key === "zabieno_deleted_images") {
+        setRefreshKey((prev) => prev + 1);
+      }
+    };
+
+    const handleImageUpdate = () => {
+      setRefreshKey((prev) => prev + 1);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("imagesUpdated", handleImageUpdate);
+    
+    // Auch auf lokale Änderungen reagieren (wenn im selben Tab)
+    const interval = setInterval(() => {
+      setRefreshKey((prev) => prev + 1);
+    }, 1000); // Prüfe jede Sekunde
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("imagesUpdated", handleImageUpdate);
+      clearInterval(interval);
+    };
+  }, []);
+
+  const paintings = useMemo(() => {
+    const staticPaintings = allPaintings.filter(
+      (p) => !isImageDeleted(p.path)
+    );
+    const addedPaintings = getAddedImagesByCategory("gemaelde");
+    return [...staticPaintings, ...addedPaintings];
+  }, [refreshKey]);
 
   return (
     <section className={styles.section} aria-label="Gemälde">
       <div className={styles.grid}>
         {paintings.map((p) => (
-          <div
-            key={p.path}
-            className={styles.card}
-          >
+          <div key={p.id || p.path} className={styles.card}>
             <img
               className={styles.img}
               src={p.url}

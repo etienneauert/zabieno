@@ -4,8 +4,14 @@ import KontaktOverlay from "./overlays/KontaktOverlay";
 import IchUeberMichOverlay from "./overlays/IchUeberMichOverlay";
 import DatenschutzImpressumOverlay from "./overlays/DatenschutzImpressumOverlay";
 import AndereUeberMichOverlay from "./overlays/AndereUeberMichOverlay";
+import KuenstlerloginOverlay from "./overlays/KuenstlerloginOverlay";
 
-export default function Footer({ lang = "de" }) {
+export default function Footer({
+  lang = "de",
+  onChangeTab,
+  isEditMode,
+  setIsEditMode,
+}) {
   const isEn = lang === "en";
   const [overlayTarget, setOverlayTarget] = useState(null);
 
@@ -19,6 +25,13 @@ export default function Footer({ lang = "de" }) {
         return <DatenschutzImpressumOverlay />;
       case "/andere-ueber-mich":
         return <AndereUeberMichOverlay />;
+      case "/kuenstlerlogin":
+        return (
+          <KuenstlerloginOverlay
+            lang={lang}
+            setIsEditMode={setIsEditMode}
+          />
+        );
       default:
         return null;
     }

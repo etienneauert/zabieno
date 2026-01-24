@@ -26,11 +26,21 @@
 .overlayContent {
   position: fixed;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: min(720px, calc(100% - 48px));
+  top: 50px;
+  transform: translateX(-50%);
+  width: min(1500px, calc(100% - 48px));
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
   text-align: center;
   color: #111;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.overlayContent::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .overlayHeading {
@@ -131,7 +141,7 @@
 .overlayPressPreview {
   flex: 1;
   min-width: 260px;
-  max-width: 520px;
+  max-width: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -168,7 +178,6 @@
     max-width: 100%;
   }
 }
-
 
 .overlayPdf {
   margin-top: 14px;
