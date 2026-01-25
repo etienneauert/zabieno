@@ -1,6 +1,6 @@
 * {
   /* Keine zusätzlichen Webfonts für Fließtext – nur System-Fallbacks */
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 html {
@@ -22,6 +22,18 @@ body {
   -ms-overflow-style: none; /* alte Edge/IE */
 }
 
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .top {
   position: relative;
   display: flex;
@@ -32,4 +44,5 @@ body {
 
 .main {
   padding-top: 24px;
+  flex: 1;
 }

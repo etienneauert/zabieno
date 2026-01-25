@@ -57,14 +57,7 @@ export default function KuenstlerloginOverlay({
     return (
       <OverlayShell>
         <div className={overlayStyles.adminContainer}>
-          <button
-            type="button"
-            onClick={handleBack}
-            className={overlayStyles.backButton}
-          >
-            {isEn ? "← Back" : "← Zurück"}
-          </button>
-          <AdminGallery category={selectedCategory} lang={lang} />
+          <AdminGallery category={selectedCategory} lang={lang} onBack={handleBack} />
         </div>
       </OverlayShell>
     );

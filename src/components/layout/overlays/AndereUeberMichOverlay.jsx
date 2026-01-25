@@ -14,6 +14,14 @@ import imgFrauenQuartett from "../../../assets/zabieno-material/Presse/Frauen-Qu
 
 const PRESS = [
   {
+    id: "ich-male-mit-allem",
+    date: "18. März 2013",
+    source: "Paderborn – aktuelle Nachrichten",
+    title: "Ich male mit allem",
+    asset: imgIchMaleMitAllem,
+    assetType: "image",
+  },
+  {
     id: "es-amor",
     date: "29. Juli 2014",
     source: "Marcela Aiello",
@@ -52,14 +60,6 @@ const PRESS = [
     title: "Der Kreativität freien Lauf",
     asset: null,
     assetType: null,
-  },
-  {
-    id: "ich-male-mit-allem",
-    date: "18. März 2013",
-    source: "Paderborn – aktuelle Nachrichten",
-    title: "Ich male mit allem",
-    asset: imgIchMaleMitAllem,
-    assetType: "image",
   },
   {
     id: "faszinierendes-farbspektakel",
@@ -105,10 +105,17 @@ export default function AndereUeberMichOverlay() {
 
   return (
     <OverlayShell>
-      <div className={styles.overlayHeading}>Andere über mich</div>
+      <div style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        minHeight: 'calc(100vh - 200px)'
+      }}>
+        <div className={styles.overlayHeading}>Andere über mich</div>
 
-      <div className={styles.overlayBlock}>
-        <div className={styles.overlayPressLayout}>
+        <div className={styles.overlayBlock} style={{ width: '100%', maxWidth: '1200px' }}>
+          <div className={styles.overlayPressLayout}>
           <div className={styles.overlayPressList}>
             <ul>
               {PRESS.map((p) => {
@@ -161,6 +168,7 @@ export default function AndereUeberMichOverlay() {
             )}
           </div>
         </div>
+      </div>
       </div>
     </OverlayShell>
   );

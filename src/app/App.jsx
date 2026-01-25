@@ -16,7 +16,7 @@ function App() {
   const [isEditMode, setIsEditMode] = useState(false);
 
   return (
-    <div>
+    <div className="app">
       <div className="top">
         <LanguageToggle
           lang={lang}

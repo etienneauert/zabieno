@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import styles from "./AdminGallery.module.css";
 import {
   getDeletedImages,
@@ -54,13 +54,30 @@ const allExhibitions = Object.entries(exhibitionModules)
   }))
   .sort((a, b) => a.name.localeCompare(b.name, "de"));
 
-export default function AdminGallery({ category, lang = "de" }) {
+export default function AdminGallery({ category, lang = "de", onBack }) {
   const isEn = lang === "en";
   const [deletedPaths, setDeletedPaths] = useState(getDeletedImages());
   const [addedImages, setAddedImages] = useState(
     getAddedImagesByCategory(category),
   );
   const fileInputRef = useRef(null);
+
+  // Aktualisiere addedImages wenn sich die Kategorie ändert
+  useEffect(() => {
+    setAddedImages(getAddedImagesByCategory(category));
+  }, [category]);
+
+  // Höre auf Custom Events für Bild-Updates
+  useEffect(() => {
+    const handleImagesUpdated = () => {
+      setAddedImages(getAddedImagesByCategory(category));
+    };
+
+    window.addEventListener("imagesUpdated", handleImagesUpdated);
+    return () => {
+      window.removeEventListener("imagesUpdated", handleImagesUpdated);
+    };
+  }, [category]);
 
   const images = useMemo(() => {
     let staticImages;
@@ -106,51 +123,60 @@ export default function AdminGallery({ category, lang = "de" }) {
   };
 
   const handleFileSelect = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      // Prüfe ob es ein Bild ist
-      if (!file.type.startsWith("image/")) {
-        alert(
-          isEn
-            ? "Please select an image file."
-            : "Bitte wählen Sie eine Bilddatei aus.",
-        );
-        return;
+    const file = e.target?.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    // Prüfe ob es ein Bild ist
+    if (!file.type.startsWith("image/")) {
+      alert(
+        isEn
+          ? "Please select an image file."
+          : "Bitte wählen Sie eine Bilddatei aus.",
+      );
+      return;
+    }
+
+    // Konvertiere die Datei zu einer Data URL
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const dataUrl = event.target?.result;
+      if (dataUrl) {
+        // Extrahiere den Dateinamen ohne Extension
+        const imageName = file.name.replace(/\.[^/.]+$/, "");
+
+        // Füge das Bild direkt hinzu
+        addImage({
+          url: dataUrl,
+          name: imageName,
+          category: category,
+          path: `added-${Date.now()}`,
+        });
+
+        // Aktualisiere den State mit den neuesten Daten aus localStorage
+        const updatedImages = getAddedImagesByCategory(category);
+        setAddedImages(updatedImages);
+
+        // Dispatch Custom Event, um andere Komponenten zu benachrichtigen
+        window.dispatchEvent(new CustomEvent("imagesUpdated"));
       }
+    };
+    reader.readAsDataURL(file);
 
-      // Konvertiere die Datei zu einer Data URL
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const dataUrl = event.target?.result;
-        if (dataUrl) {
-          // Extrahiere den Dateinamen ohne Extension
-          const imageName = file.name.replace(/\.[^/.]+$/, "");
-
-          // Füge das Bild direkt hinzu
-          addImage({
-            url: dataUrl,
-            name: imageName,
-            category: category,
-            path: `added-${Date.now()}`,
-          });
-          setAddedImages(getAddedImagesByCategory(category));
-
-          // Dispatch Custom Event, um andere Komponenten zu benachrichtigen
-          window.dispatchEvent(new CustomEvent("imagesUpdated"));
-        }
-      };
-      reader.readAsDataURL(file);
-
-      // Reset file input
-      if (fileInputRef.current) {
-        fileInputRef.current.value = "";
-      }
+    // Reset file input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
     }
   };
 
-  const handleAddButtonClick = () => {
+  const handleAddButtonClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (fileInputRef.current) {
       fileInputRef.current.click();
+    } else {
+      console.error("File input ref is not set");
     }
   };
 
@@ -170,7 +196,18 @@ export default function AdminGallery({ category, lang = "de" }) {
   return (
     <div className={styles.adminGallery}>
       <div className={styles.header}>
-        <h2 className={styles.heading}>{getCategoryName()}</h2>
+        <div className={styles.titleRow}>
+          {onBack && (
+            <button
+              type="button"
+              onClick={onBack}
+              className={styles.backButton}
+            >
+              {lang === "en" ? "← Back" : "← Zurück"}
+            </button>
+          )}
+          <h2 className={styles.heading}>{getCategoryName()}</h2>
+        </div>
         <div>
           <input
             ref={fileInputRef}
@@ -178,7 +215,6 @@ export default function AdminGallery({ category, lang = "de" }) {
             accept="image/*"
             onChange={handleFileSelect}
             className={styles.hiddenFileInput}
-            style={{ display: "none" }}
           />
           <button
             type="button"

@@ -13,10 +13,32 @@
   gap: 16px;
 }
 
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .heading {
   font-size: 22px;
   font-weight: 600;
   margin: 0;
+}
+
+.backButton {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: transparent;
+  color: #111;
+  border: 1px solid #111;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.backButton:hover {
+  background-color: #111;
+  color: #fff;
 }
 
 .addButton {
@@ -37,7 +59,15 @@
 }
 
 .hiddenFileInput {
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 /* Masonry: Bilder behalten ihre natürlichen Abmessungen/Höhen */
