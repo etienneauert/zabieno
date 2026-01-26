@@ -74,7 +74,8 @@
 .grid {
   column-gap: 14px;
   column-count: 2;
-  column-fill: auto;
+  column-width: auto;
+  width: 100%;
 }
 
 @media (min-width: 640px) {
@@ -122,6 +123,7 @@
 .card {
   break-inside: avoid;
   -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
   display: inline-block;
   width: 100%;
   margin: 0 0 14px;
@@ -129,6 +131,8 @@
   overflow: hidden;
   border: none;
   background: transparent;
+  box-sizing: border-box;
+  vertical-align: top;
 }
 
 .img {

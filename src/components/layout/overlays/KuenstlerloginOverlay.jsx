@@ -17,7 +17,9 @@ export default function KuenstlerloginOverlay({
   const [isLoading, setIsLoading] = useState(false);
 
   // Der gespeicherte Hash des Passworts (aus .env)
-  const storedPasswordHash = import.meta.env.VITE_ARTIST_PASSWORD_HASH;
+  // Trimme Whitespace, falls vorhanden
+  const envHash = import.meta.env.VITE_ARTIST_PASSWORD_HASH;
+  const storedPasswordHash = (envHash && typeof envHash === 'string' ? envHash.trim() : null) || 'd3751d33f9cd5049c4af2b462735457e4d3baf130bcbb87f389e349fbaeb20b9';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
