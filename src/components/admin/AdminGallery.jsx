@@ -212,7 +212,7 @@ export default function AdminGallery({ category, lang = "de", onBack }) {
           <input
             ref={fileInputRef}
             type="file"
-            accept="image/*"
+            accept="image/*,.png,.PNG"
             onChange={handleFileSelect}
             className={styles.hiddenFileInput}
           />

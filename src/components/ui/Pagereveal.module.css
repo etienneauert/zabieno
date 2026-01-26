@@ -11,7 +11,7 @@
 
 .pageRevealName {
   position: fixed;
-  z-index: 10000;
+  z-index: 10020;
   color: #111;
   will-change: transform, left, top, opacity;
   display: inline-flex;

@@ -57,7 +57,6 @@ export default function Lightbox({ isOpen, src, title, meta, alt, onClose }) {
       >
         <div className={styles.topbar}>
           {title ? <div className={styles.title}>{title}</div> : null}
-          <div className={styles.meta}>{computedMeta}</div>
         </div>
         <div className={styles.media}>
           <img className={styles.image} src={src} alt={alt ?? ""} />
