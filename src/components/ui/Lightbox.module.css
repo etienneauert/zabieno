@@ -15,10 +15,12 @@
   outline: none;
   max-width: min(92vw, 1200px);
   max-height: 92vh;
+  background: transparent;
 }
 
 .media {
   position: relative;
+  background: transparent;
 }
 
 .topbar {
@@ -27,8 +29,7 @@
   align-items: center;
   gap: 12px;
   padding: 0 2px 12px;
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.65);
+  color: #ffffff;
   background: transparent;
   text-align: center;
 }
@@ -42,8 +43,6 @@
   white-space: nowrap;
   max-width: min(70vw, 900px);
   background: transparent;
-  /* kein "blur/glow" hinter dem Namen */
-  text-shadow: none;
 }
 
 .meta {
@@ -61,6 +60,7 @@
   width: auto;
   border-radius: 14px;
   box-shadow: 0 22px 70px rgba(0, 0, 0, 0.55);
+  background: transparent;
 }
 
 /* Scroll lock */
