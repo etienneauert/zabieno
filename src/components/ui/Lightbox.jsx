@@ -1,16 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import styles from "./Lightbox.module.css";
 
-export default function Lightbox({ isOpen, src, title, meta, alt, onClose }) {
+export default function Lightbox({ isOpen, src, title, alt, onClose }) {
   const dialogRef = useRef(null);
-  const [pxSize, setPxSize] = useState(null);
-
-  const computedMeta = useMemo(() => {
-    if (meta) return meta;
-    if (pxSize?.w && pxSize?.h) return `${pxSize.w}×${pxSize.h} px`;
-    return "";
-  }, [meta, pxSize]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -28,20 +21,6 @@ export default function Lightbox({ isOpen, src, title, meta, alt, onClose }) {
       document.documentElement.classList.remove("lightbox-open");
     };
   }, [isOpen, onClose]);
-
-  useEffect(() => {
-    if (!isOpen || !src) return;
-    let cancelled = false;
-    const img = new Image();
-    img.onload = () => {
-      if (cancelled) return;
-      setPxSize({ w: img.naturalWidth, h: img.naturalHeight });
-    };
-    img.src = src;
-    return () => {
-      cancelled = true;
-    };
-  }, [isOpen, src]);
 
   if (!isOpen) return null;
 
